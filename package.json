@@ -1,0 +1,17 @@
+{
+ "name": "reach-app",
+ "private": true,
+ "scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "prebuild": "mkdir -p public && cp index.html app.js public/",
+  "predev": "mkdir -p public && cp index.html app.js public/"
+ },
+ "dependencies": {
+  "@vercel/blob": "^2.0.0",
+  "next": "^16.4.3",
+  "react": "19.1.1",
+  "react-dom": "19.1.1"
+ }
+}

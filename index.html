@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>REACH Recognition Cards – Store #0851</title>
+<title>REACH Recognition Cards</title>
 <script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#eef2f7;color:#1b2430}
@@ -52,65 +52,66 @@ button.alt{background:#e8833a}
  body.multi #sheet{display:grid;grid-template-columns:repeat(2,3.5in);grid-auto-rows:2in;gap:.1in .25in;justify-content:center;padding-top:.35in}
  body.multi #sheet .card{outline:.5pt dashed #bbb}
 }
+
+nav{display:flex;gap:6px;max-width:1050px;margin:12px auto 0;padding:0 16px}nav button{flex:none;background:#cfd8e6;color:#1f2d5c;padding:9px 16px}nav button.on{background:#1f2d5c;color:#fff}
+.tab{display:none}.tab.on{display:grid}
+#banner{background:#fff3cd;color:#664d03;padding:8px 16px;text-align:center;font-size:.9rem;font-weight:600;display:none}
+#banner.live{background:#d1e7dd;color:#0f5132}
+table{width:100%;border-collapse:collapse;font-size:.85rem}td,th{padding:6px;border-bottom:1px solid #eee;text-align:left}
+.x{background:#eee;color:#a00;flex:none;padding:3px 8px;font-size:.8rem}
+.msg{margin-top:10px;font-size:.9rem;padding:8px;border-radius:8px;display:none}.msg.ok{display:block;background:#d1e7dd}.msg.err{display:block;background:#f8d7da}
+.pool{border:1px solid #e3e8ef;border-radius:10px;padding:10px;margin:8px 0}.pool h4{margin:0 0 4px}.win{background:#fff3cd;font-weight:700}
+#login{max-width:360px;margin:60px auto}
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cats button{padding:14px 8px;font-size:.95rem;opacity:.45;border:3px solid transparent}.cats button.on{opacity:1;border-color:#1b2430}.cats button:last-child{grid-column:span 2}
 </style>
 <style id="pg">@media print{@page{size:3.5in 2in;margin:0}}</style>
 </head><body>
-<header><h1>REACH Recognition Cards</h1><p>Store #0851</p></header>
-<main>
+<header><h1>REACH Recognition Cards</h1><p>Store #0851 · demo concept, not an official TJX tool</p></header>
+<div id="banner"></div>
+<div id="login" class="panel" style="display:none"><strong>Admin sign-in</strong><label for="pass">Passcode</label><input id="pass" type="password"><div class="btns"><button id="loginBtn">Sign in</button></div><div id="loginMsg" class="msg"></div></div>
+<div id="app">
+<nav><button data-t="cardT" class="on">Send a card</button><button data-t="menuT">☰ Menu</button><button id="logout" style="display:none;margin-left:auto">Sign out</button></nav>
+<main id="cardT" class="tab on" style="grid-template-columns:1fr;max-width:560px">
 <section class="panel form">
-<label>Card type</label>
-<div class="seg"><label><input type="radio" name="type" value="prize" checked>Prize drawing</label><label><input type="radio" name="type" value="congrats">Congratulations</label></div>
-<label for="name">Associate name</label><input id="name" placeholder="e.g. Jordan Smith" maxlength="40">
-<label for="cat">Category</label><select id="cat"></select>
-<label for="msg">Why (prize card)</label><textarea id="msg" maxlength="200" placeholder="Helped a customer find..."></textarea>
-<label for="from">From</label><input id="from" placeholder="Bryan" maxlength="40">
-<label for="date">Date</label><input id="date" type="date">
+<label for="name">Who?</label><input id="name" list="empList" placeholder="Start typing a name…" maxlength="40" autocomplete="off"><datalist id="empList"></datalist><input type="hidden" id="emp"><div id="empHint" class="hint"></div>
+<label>Category</label><div id="catBtns" class="cats"></div><input type="hidden" id="cat" value="Customer Engagement">
+<label for="msg">Why? <span class="hint">(optional)</span> <button type="button" id="mic" title="Speak" style="display:none;flex:none;padding:4px 10px;font-size:.85rem;margin-left:6px">🎤</button> <span id="micState" class="hint"></span></label><textarea id="msg" maxlength="220" rows="2" placeholder="Ex: Recovered the fitting room during the rush without being asked."></textarea><div class="hint">Be specific: what did they do? A process they followed or an action they took.</div>
+<div class="btns"><button id="send" style="font-size:1.15rem;padding:16px">Send</button></div>
+<div class="btns" id="recordRow" style="margin-top:8px;display:none"><button id="record" style="background:#5a6b85">Record without sending</button></div>
+<div id="sendMsg" class="msg"></div>
+<details style="margin-top:12px"><summary class="hint">Card options: <span id="optSum"></span></summary>
+<label class="chk"><input type="checkbox" id="congrats"> Congratulations card instead of prize drawing</label>
+<div class="row" style="gap:10px"><div><label for="from">From</label><input id="from" maxlength="40"></div><div><label for="date">Date</label><input id="date" type="date"></div></div></details>
+<details style="margin-top:8px"><summary class="hint">Preview card</summary><div class="wrap" id="wrap" style="margin-top:8px"><div class="card" id="card"></div></div></details>
+</section></main>
+<main id="menuT" class="tab" style="grid-template-columns:1fr">
+<section class="panel histbox"><strong>Cards this month</strong><ul id="hist"></ul>
 <label class="chk"><input type="checkbox" id="multi"> Print a sheet of 10 (letter paper)</label>
-<div class="btns"><button id="print">🖨️ Print</button><button id="png" class="alt">⬇️ Download PNG</button></div>
-<p class="hint">Cards print at 3.5×2 in (business-card size). Nothing is sent anywhere; recent cards are kept only on this device.</p>
-</section>
-<div>
-<div class="wrap" id="wrap"><div class="card" id="card"></div></div>
-<div id="sheet"></div>
-<div class="panel histbox" style="margin-top:18px"><strong>Recent cards</strong><ul id="hist"></ul><button id="clear">Clear history</button></div>
-</div></main>
-<script>
-const CATEGORIES=[["Customer Engagement","#d94a45"],["Connection","#2b8fd6"],["Caring","#2e8a72"],["Empowerment","#7a3a8c"],["Coaching","#e8833a"]];
-const $=id=>document.getElementById(id);
-const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-CATEGORIES.forEach(([c])=>$('cat').add(new Option(c,c)));
-$('date').value=new Date().toLocaleDateString('en-CA');
-$('from').value=localStorage.getItem('rc_from')||'';
-const type=()=>document.querySelector('input[name=type]:checked').value;
-function fmt(d){if(!d)return'';const[y,m,da]=d.split('-');return new Date(y,m-1,da).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
-const HEAD=`<div class="hd">${[...'reach'].map(l=>`<div class="t ${l}"><span>${l}</span></div>`).join('')}<div class="logo"><span class="tj">TJ·MAXX</span><span class="ms">Marshalls</span></div></div>`;
-function cardHTML(){const n=esc($('name').value.trim()),m=esc($('msg').value.trim()),f=esc($('from').value.trim()),d=fmt($('date').value),cat=$('cat').value;
- if(type()==='prize'){const who=n?`<b>${n}</b> — `:'';
-  return HEAD+`<div class="bd"><div class="small">you've been entered into our</div><div><span class="big">MONTHLY PRIZE DRAWING!</span> <span>and here's why:</span></div><div class="lines"><div>${who}${m}${f?` <i style="opacity:.8">– ${f}${d?', '+d:''}</i>`:''}</div></div></div>`+
-  `<div class="ft">${CATEGORIES.map(([c,col])=>`<span class="${c===cat?'sel':''}" style="color:${col}">${c}</span>`).join('<span class="dot">•</span>')}</div>`}
- const col=CATEGORIES.find(x=>x[0]===cat)[1];
- return HEAD+`<span class="cat" style="background:${col}">${cat}</span><div class="bd"><div class="cg">CONGRATULATIONS</div><div style="margin-top:.9em" class="fl">${n}</div><div class="lb">name</div>`+
- `<div class="row" style="margin-top:.3em"><div><div class="fl">${d}</div><div class="lb">date</div></div><div><div class="fl">${f}</div><div class="lb">from</div></div></div></div>`+
- `<div class="ft reh">${['Remember','Everyone','Affects','Customer','Happiness'].map((w,i)=>`<b><span style="color:${CATEGORIES[i][1]}">${w[0]}</span>${w.slice(1)}</b>`).join('')}</div>`}
-function fit(){const w=Math.min($('wrap').clientWidth,560);$('card').style.fontSize=(w/35)+'px'}
-function render(){$('card').innerHTML=cardHTML();$('msg').closest('label');$('msg').disabled=type()!=='prize';$('msg').style.opacity=type()==='prize'?1:.5}
-['name','cat','msg','from','date'].forEach(i=>$(i).addEventListener('input',render));
-document.querySelectorAll('input[name=type]').forEach(r=>r.addEventListener('change',render));
-addEventListener('resize',fit);
-function hist(){return JSON.parse(localStorage.getItem('rc_hist')||'[]')}
-function save(){const n=$('name').value.trim();if(!n)return;localStorage.setItem('rc_from',$('from').value);
-const x={type:type(),name:n,cat:$('cat').value,msg:$('msg').value,from:$('from').value,date:$('date').value};
-const h=hist().filter(y=>!(y.name===x.name&&y.cat===x.cat&&y.date===x.date&&y.type===x.type));h.unshift(x);localStorage.setItem('rc_hist',JSON.stringify(h.slice(0,15)));showHist()}
-function setType(t){document.querySelector(`input[name=type][value=${t||'prize'}]`).checked=true}
-function showHist(){const ul=$('hist');ul.innerHTML='';const h=hist();if(!h.length)ul.innerHTML='<li style="cursor:default;color:#888">None yet</li>';
-h.forEach(x=>{const li=document.createElement('li');li.textContent=`${x.name} — ${x.cat} · ${x.type==='congrats'?'Congrats':'Prize'} (${fmt(x.date)})`;li.onclick=()=>{setType(x.type);for(const k of['name','cat','msg','from','date'])if(CATEGORIES.some(c=>c[0]===x.cat)||k!=='cat')$(k).value=x[k]||'';render();scrollTo(0,0)};ul.appendChild(li)})}
-$('clear').onclick=()=>{localStorage.removeItem('rc_hist');showHist()};
-$('print').onclick=()=>{save();const multi=$('multi').checked;document.body.className=multi?'multi':'single';
- $('pg').textContent=multi?'@media print{@page{size:letter;margin:0}}':'@media print{@page{size:3.5in 2in;margin:0}}';
- $('sheet').innerHTML=multi?Array(10).fill(`<div class="card">${cardHTML()}</div>`).join(''):'';window.print()};
-$('png').onclick=async()=>{save();const c=await html2canvas($('card'),{scale:1050/$('card').offsetWidth,backgroundColor:'#fff'});const a=document.createElement('a');
-a.download=`reach-card-${($('name').value.trim()||'associate').replace(/\W+/g,'-')}.png`;a.href=c.toDataURL('image/png');a.click()};
-const q=new URLSearchParams(location.search);for(const k of['name','cat','msg','from','date'])if(q.get(k))$(k).value=q.get(k);if(q.get('type'))setType(q.get('type'));
-if(q.has("cardonly")){for(const sel of["header",".form",".histbox"])document.querySelector(sel).style.display="none";document.body.style.background="#fff";document.querySelector('main').style.display='block'}
-fit();render();showHist();
-</script></body></html>
+<div class="btns"><button id="print">🖨️ Print current card</button><button id="png" class="alt">⬇️ Download PNG</button></div><div id="sheet"></div></section>
+
+<section class="panel"><strong>WorkJam directory</strong> <span id="wjState" class="hint"></span>
+<div class="btns"><button id="wjSync" style="background:#5a6b85">⟳ Sync from WorkJam</button></div>
+<label for="wjSearch">Search WorkJam employees</label><input id="wjSearch" placeholder="Type a name…"><div id="wjResults"></div></section>
+<section class="panel"><strong>Add one employee</strong>
+<div class="row" style="gap:10px"><div><label for="eName">Name</label><input id="eName"></div><div><label for="eEmail">Company email</label><input id="eEmail" type="email"></div></div>
+<div class="row" style="gap:10px"><div><label for="eEid">Employee ID (optional)</label><input id="eEid"></div><div><label for="eWj">WorkJam ID (optional)</label><input id="eWj"></div></div>
+<label class="chk"><input type="checkbox" id="wjPush" disabled> Also add to WorkJam <span class="hint" id="wjPushNote">(disabled: WorkJam writes not enabled)</span></label>
+<div class="btns"><button id="eAdd">Add employee</button></div><div id="addMsg" class="msg"></div></section>
+<section class="panel"><strong>Bulk import</strong>
+<label for="csv">Upload a CSV file (name, email, optional employee ID, WorkJam ID)</label><input id="csv" type="file" accept=".csv,.txt,text/csv">
+<label for="paste">…or paste rows copied from a spreadsheet (tab or comma separated, header optional)</label><textarea id="paste" rows="5" placeholder="Jordan Smith	jordan.smith@company.com"></textarea>
+<div class="btns"><button id="preview" style="background:#5a6b85">Preview import</button></div>
+<div id="impPrev"></div><div id="impMsg" class="msg"></div></section>
+<section class="panel"><strong>Employee list (<span id="eCount">0</span>)</strong><table id="eTable"></table></section>
+
+<section class="panel"><strong>Monthly raffle</strong>
+<div class="row" style="gap:10px"><div><label for="month">Month</label><input id="month" type="month"></div>
+<div><label for="mode">Entries</label><select id="mode"><option value="per-card">One entry per card received (more cards = more chances)</option><option value="per-person">One entry per person per category</option></select></div></div>
+<div class="btns"><button id="drawBtn">🎲 Draw now (preview)</button><button id="confirmBtn" class="alt" disabled>✉️ Confirm &amp; email winners</button></div>
+<p class="hint">Draw now picks one winner per category with crypto-secure randomness and saves the result with the full entry list. No winner emails go out until you confirm. On the 1st of each month the server draws the prior month automatically, emails the winners and sends you the list.</p>
+<div id="drawOut"></div></section>
+<section class="panel"><strong>Pools for <span id="poolMonth"></span></strong><div id="pools"></div></section>
+<section class="panel"><strong>Draw history (audit)</strong><div id="drawHist"></div></section>
+</main>
+</div>
+<script src="app.js"></script></body></html>

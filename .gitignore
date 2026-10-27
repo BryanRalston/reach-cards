@@ -1,0 +1,7 @@
+node_modules
+.next
+.data
+.env*
+.vercel
+public/index.html
+public/app.js
