@@ -1,86 +1,116 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Reach Recognition Cards – Store #0851</title>
+<title>REACH Recognition Cards – Store #0851</title>
 <script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#eef2f7;color:#1b2430}
-header{background:#0b3d91;color:#fff;padding:14px 18px}header h1{margin:0;font-size:1.2rem}header p{margin:2px 0 0;opacity:.8;font-size:.85rem}
-main{max-width:1000px;margin:auto;padding:16px;display:grid;gap:20px;grid-template-columns:1fr}
-@media(min-width:800px){main{grid-template-columns:340px 1fr}}
+header{background:#1f2d5c;color:#fff;padding:14px 18px}header h1{margin:0;font-size:1.2rem}header p{margin:2px 0 0;opacity:.8;font-size:.85rem}
+main{max-width:1050px;margin:auto;padding:16px;display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:820px){main{grid-template-columns:340px 1fr}}
 .panel{background:#fff;border-radius:12px;padding:16px;box-shadow:0 1px 4px #0002}
 label{display:block;font-weight:600;font-size:.9rem;margin:12px 0 4px}
 input,select,textarea{width:100%;padding:11px;font-size:16px;border:1px solid #c7d0dc;border-radius:8px;font-family:inherit}
 textarea{resize:vertical;min-height:70px}.hint{font-size:.75rem;color:#667}
-.btns{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}button{flex:1;padding:12px;font-size:1rem;border:0;border-radius:8px;background:#0b3d91;color:#fff;font-weight:600;cursor:pointer}
-button.alt{background:#f2b705;color:#1b2430}
+.seg{display:flex;gap:6px}.seg label{flex:1;margin:0;text-align:center;padding:10px;border:1px solid #c7d0dc;border-radius:8px;cursor:pointer;font-size:.85rem}
+.seg input{display:none}.seg label:has(input:checked){background:#1f2d5c;color:#fff;border-color:#1f2d5c}
+.chk{display:flex;gap:8px;align-items:center;font-weight:500}.chk input{width:auto}
+.btns{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}button{flex:1;padding:12px;font-size:1rem;border:0;border-radius:8px;background:#1f2d5c;color:#fff;font-weight:600;cursor:pointer}
+button.alt{background:#e8833a}
 .wrap{display:flex;justify-content:center}
-#card{width:100%;max-width:525px;aspect-ratio:7/5;background:linear-gradient(135deg,#fff 0%,#f6f9ff 100%);border-radius:14px;position:relative;overflow:hidden;box-shadow:0 6px 20px #0003;padding:6%;display:flex;flex-direction:column;border:3px solid #0b3d91}
-#card:before{content:"";position:absolute;inset:8px;border:1.5px solid #f2b705;border-radius:9px;pointer-events:none}
-.top{display:flex;justify-content:space-between;align-items:center}
-.brand{font-size:.7rem;letter-spacing:.15em;font-weight:700;color:#0b3d91;text-transform:uppercase}
-.badge{background:#0b3d91;color:#fff;font-size:.7rem;padding:4px 10px;border-radius:20px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-.star{color:#f2b705;font-size:1.8rem;text-align:center;margin-top:2%}
-.title{text-align:center;font-family:Georgia,serif;font-size:clamp(1rem,4vw,1.5rem);color:#0b3d91;margin:0}
-.name{text-align:center;font-family:Georgia,serif;font-size:clamp(1.4rem,6vw,2.3rem);font-weight:700;margin:3% 0 1%;border-bottom:2px solid #f2b705;padding-bottom:2%;word-break:break-word}
-.msg{text-align:center;font-style:italic;font-size:clamp(.75rem,2.6vw,.95rem);color:#334;flex:1;margin-top:2%;overflow:hidden}
-.foot{display:flex;justify-content:space-between;font-size:clamp(.65rem,2.2vw,.8rem);color:#445;margin-top:auto}
-.foot b{display:block;color:#1b2430}
+/* ---- card: everything in em; card is 35em x 20em (3.5 x 2 in at 0.1in/em) ---- */
+.card{width:35em;height:20em;background:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;font-family:Helvetica,Arial,sans-serif;color:#333;box-shadow:0 .4em 1.4em #0003;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.hd{display:flex;height:5em;flex:none}
+.t{width:5.5em;height:5em;position:relative;overflow:hidden;color:#fff;font-weight:900;font-size:1em;display:flex;align-items:center;justify-content:center;margin-right:.15em}
+.t span{position:relative;font-size:4em;line-height:1;font-family:"Arial Black",Arial,Helvetica,sans-serif;text-shadow:.03em .03em 0 #0003}
+.t:before{content:"";position:absolute;right:-1em;top:-2.2em;width:4.6em;height:4.6em;background:#0003;transform:rotate(45deg)}
+.r{background:#d94a45}.e{background:#2b8fd6}.a{background:#2e8a72}.c{background:#7a3a8c}.h{background:#e8833a}
+.logo{flex:1;background:#e6e6e6;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05}
+.tj{color:#c8102e;font-weight:900;font-size:1.25em;letter-spacing:-.02em}.ms{color:#1f2d5c;font-weight:700;font-size:1.4em;font-family:Georgia,serif;letter-spacing:-.03em}
+.bd{flex:1;padding:.8em 2em .3em;display:flex;flex-direction:column;min-height:0}
+.ft{height:2.6em;flex:none;background:#e3e3e3;display:flex;align-items:center;justify-content:center;gap:.3em;font-weight:700;font-size:.92em;white-space:nowrap}
+.ft .dot{color:#555}.ft .sel{text-decoration:underline;text-decoration-thickness:.12em;text-underline-offset:.15em;background:#fff;border-radius:.3em;padding:0 .25em}
+.ft.reh{justify-content:space-between;padding:0 1.6em;font-size:1.05em;color:#444}
+.ft.reh b{font-weight:800}
+.small{font-size:1.05em;color:#555;font-weight:300}
+.big{font-size:1.6em;font-weight:800;color:#333;letter-spacing:.01em}.big+span{font-size:1.05em;color:#555;font-weight:300}
+.lines{flex:1;position:relative;margin-top:.5em;background:repeating-linear-gradient(#fff 0,#fff 2.05em,#999 2.05em,#999 2.13em);font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive;font-size:1em;overflow:hidden}
+.lines div{font-size:1.2em;line-height:1.775em;color:#1f2d5c;padding:0 .2em;word-break:break-word}
+.cg{text-align:center;font-size:1.8em;font-weight:800;letter-spacing:.06em;color:#333;margin:.1em 0 0}
+.fl{border-bottom:.1em solid #999;text-align:center;font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive;color:#1f2d5c;min-height:1.6em;font-size:1.25em;line-height:1.5;white-space:nowrap;overflow:hidden}
+.lb{text-align:center;font-size:1em;color:#555;font-weight:300;margin-top:.05em}
+.row{display:flex;gap:3em}.row>div{flex:1}
+.cat{position:absolute;right:1.5em;bottom:3.3em;font-size:.75em;font-weight:700;padding:.15em .6em;border-radius:1em;color:#fff}
 #hist{list-style:none;padding:0;margin:8px 0 0;font-size:.85rem}#hist li{padding:6px 0;border-bottom:1px solid #eee;cursor:pointer}
 #clear{background:#ccc;color:#222;flex:none;padding:6px 10px;font-size:.8rem;margin-top:8px}
-@media print{@page{size:7in 5in;margin:0}body{background:#fff}header,.panel.form,.histbox{display:none!important}main{display:block;padding:0}.panel{box-shadow:none;padding:0}
-#card{width:7in;max-width:none;height:5in;box-shadow:none;border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}.title{font-size:24pt}.name{font-size:36pt}.msg{font-size:13pt}.brand,.badge{font-size:9pt}.foot{font-size:11pt}}
-</style></head><body>
-<header><h1>⭐ Reach Recognition Cards</h1><p>Store #0851</p></header>
+#sheet{display:none}
+@media print{
+ body{background:#fff}header,.panel.form,.histbox{display:none!important}main{display:block;padding:0}
+ .card{font-size:.1in!important;box-shadow:none}
+ body.single @page{}
+ body.multi .wrap{display:none}
+ body.multi #sheet{display:grid;grid-template-columns:repeat(2,3.5in);grid-auto-rows:2in;gap:.1in .25in;justify-content:center;padding-top:.35in}
+ body.multi #sheet .card{outline:.5pt dashed #bbb}
+}
+</style>
+<style id="pg">@media print{@page{size:3.5in 2in;margin:0}}</style>
+</head><body>
+<header><h1>REACH Recognition Cards</h1><p>Store #0851</p></header>
 <main>
 <section class="panel form">
+<label>Card type</label>
+<div class="seg"><label><input type="radio" name="type" value="prize" checked>Prize drawing</label><label><input type="radio" name="type" value="congrats">Congratulations</label></div>
 <label for="name">Associate name</label><input id="name" placeholder="e.g. Jordan Smith" maxlength="40">
 <label for="cat">Category</label><select id="cat"></select>
-<label for="msg">Message (optional)</label><textarea id="msg" maxlength="220" placeholder="Thank you for..."></textarea>
-<label for="from">From</label><input id="from" placeholder="Bryan Ralston, Store Manager" maxlength="50">
+<label for="msg">Why (prize card)</label><textarea id="msg" maxlength="200" placeholder="Helped a customer find..."></textarea>
+<label for="from">From</label><input id="from" placeholder="Bryan" maxlength="40">
 <label for="date">Date</label><input id="date" type="date">
+<label class="chk"><input type="checkbox" id="multi"> Print a sheet of 10 (letter paper)</label>
 <div class="btns"><button id="print">🖨️ Print</button><button id="png" class="alt">⬇️ Download PNG</button></div>
-<p class="hint">Print uses a 7×5 in card size. Nothing is sent anywhere; recent cards are kept only on this device.</p>
+<p class="hint">Cards print at 3.5×2 in (business-card size). Nothing is sent anywhere; recent cards are kept only on this device.</p>
 </section>
 <div>
-<div class="wrap"><div id="card">
-<div class="top"><span class="brand">Store #0851</span><span class="badge" id="cCat"></span></div>
-<div class="star">★ ★ ★</div><p class="title">Reach Recognition</p>
-<div class="name" id="cName">Associate Name</div>
-<div class="msg" id="cMsg"></div>
-<div class="foot"><span>From<b id="cFrom">—</b></span><span style="text-align:right">Date<b id="cDate"></b></span></div>
-</div></div>
+<div class="wrap" id="wrap"><div class="card" id="card"></div></div>
+<div id="sheet"></div>
 <div class="panel histbox" style="margin-top:18px"><strong>Recent cards</strong><ul id="hist"></ul><button id="clear">Clear history</button></div>
 </div></main>
 <script>
-// ===== EDIT CATEGORIES HERE (PLACEHOLDERS – replace with real Reach categories) =====
-const CATEGORIES = [
-  "Teamwork",
-  "Customer Service",
-  "Going Above & Beyond",
-  "Safety",
-  "Leadership"
-];
-// ===================================================================================
+const CATEGORIES=[["Customer Engagement","#d94a45"],["Connection","#2b8fd6"],["Caring","#2e8a72"],["Empowerment","#7a3a8c"],["Coaching","#e8833a"]];
 const $=id=>document.getElementById(id);
-CATEGORIES.forEach(c=>$('cat').add(new Option(c,c)));
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+CATEGORIES.forEach(([c])=>$('cat').add(new Option(c,c)));
 $('date').value=new Date().toLocaleDateString('en-CA');
 $('from').value=localStorage.getItem('rc_from')||'';
-function fmt(d){if(!d)return'';const[y,m,da]=d.split('-');return new Date(y,m-1,da).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}
-function render(){$('cName').textContent=$('name').value.trim()||'Associate Name';$('cCat').textContent=$('cat').value;
-$('cMsg').textContent=$('msg').value.trim()?'“'+$('msg').value.trim()+'”':'';$('cFrom').textContent=$('from').value.trim()||'—';$('cDate').textContent=fmt($('date').value)}
+const type=()=>document.querySelector('input[name=type]:checked').value;
+function fmt(d){if(!d)return'';const[y,m,da]=d.split('-');return new Date(y,m-1,da).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
+const HEAD=`<div class="hd">${[...'reach'].map(l=>`<div class="t ${l}"><span>${l}</span></div>`).join('')}<div class="logo"><span class="tj">TJ·MAXX</span><span class="ms">Marshalls</span></div></div>`;
+function cardHTML(){const n=esc($('name').value.trim()),m=esc($('msg').value.trim()),f=esc($('from').value.trim()),d=fmt($('date').value),cat=$('cat').value;
+ if(type()==='prize'){const who=n?`<b>${n}</b> — `:'';
+  return HEAD+`<div class="bd"><div class="small">you've been entered into our</div><div><span class="big">MONTHLY PRIZE DRAWING!</span> <span>and here's why:</span></div><div class="lines"><div>${who}${m}${f?` <i style="opacity:.8">– ${f}${d?', '+d:''}</i>`:''}</div></div></div>`+
+  `<div class="ft">${CATEGORIES.map(([c,col])=>`<span class="${c===cat?'sel':''}" style="color:${col}">${c}</span>`).join('<span class="dot">•</span>')}</div>`}
+ const col=CATEGORIES.find(x=>x[0]===cat)[1];
+ return HEAD+`<span class="cat" style="background:${col}">${cat}</span><div class="bd"><div class="cg">CONGRATULATIONS</div><div style="margin-top:.9em" class="fl">${n}</div><div class="lb">name</div>`+
+ `<div class="row" style="margin-top:.3em"><div><div class="fl">${d}</div><div class="lb">date</div></div><div><div class="fl">${f}</div><div class="lb">from</div></div></div></div>`+
+ `<div class="ft reh">${['Remember','Everyone','Affects','Customer','Happiness'].map((w,i)=>`<b><span style="color:${CATEGORIES[i][1]}">${w[0]}</span>${w.slice(1)}</b>`).join('')}</div>`}
+function fit(){const w=Math.min($('wrap').clientWidth,560);$('card').style.fontSize=(w/35)+'px'}
+function render(){$('card').innerHTML=cardHTML();$('msg').closest('label');$('msg').disabled=type()!=='prize';$('msg').style.opacity=type()==='prize'?1:.5}
 ['name','cat','msg','from','date'].forEach(i=>$(i).addEventListener('input',render));
+document.querySelectorAll('input[name=type]').forEach(r=>r.addEventListener('change',render));
+addEventListener('resize',fit);
 function hist(){return JSON.parse(localStorage.getItem('rc_hist')||'[]')}
 function save(){const n=$('name').value.trim();if(!n)return;localStorage.setItem('rc_from',$('from').value);
-const h=hist().filter(x=>!(x.name===n&&x.cat===$('cat').value&&x.date===$('date').value));h.unshift({name:n,cat:$('cat').value,msg:$('msg').value,from:$('from').value,date:$('date').value});
-localStorage.setItem('rc_hist',JSON.stringify(h.slice(0,15)));showHist()}
+const x={type:type(),name:n,cat:$('cat').value,msg:$('msg').value,from:$('from').value,date:$('date').value};
+const h=hist().filter(y=>!(y.name===x.name&&y.cat===x.cat&&y.date===x.date&&y.type===x.type));h.unshift(x);localStorage.setItem('rc_hist',JSON.stringify(h.slice(0,15)));showHist()}
+function setType(t){document.querySelector(`input[name=type][value=${t||'prize'}]`).checked=true}
 function showHist(){const ul=$('hist');ul.innerHTML='';const h=hist();if(!h.length)ul.innerHTML='<li style="cursor:default;color:#888">None yet</li>';
-h.forEach(x=>{const li=document.createElement('li');li.textContent=`${x.name} — ${x.cat} (${fmt(x.date)})`;li.onclick=()=>{for(const k of['name','cat','msg','from','date'])$(k).value=x[k];render();scrollTo(0,0)};ul.appendChild(li)})}
+h.forEach(x=>{const li=document.createElement('li');li.textContent=`${x.name} — ${x.cat} · ${x.type==='congrats'?'Congrats':'Prize'} (${fmt(x.date)})`;li.onclick=()=>{setType(x.type);for(const k of['name','cat','msg','from','date'])if(CATEGORIES.some(c=>c[0]===x.cat)||k!=='cat')$(k).value=x[k]||'';render();scrollTo(0,0)};ul.appendChild(li)})}
 $('clear').onclick=()=>{localStorage.removeItem('rc_hist');showHist()};
-$('print').onclick=()=>{save();window.print()};
-$('png').onclick=async()=>{save();const c=await html2canvas($('card'),{scale:3,backgroundColor:null});const a=document.createElement('a');
+$('print').onclick=()=>{save();const multi=$('multi').checked;document.body.className=multi?'multi':'single';
+ $('pg').textContent=multi?'@media print{@page{size:letter;margin:0}}':'@media print{@page{size:3.5in 2in;margin:0}}';
+ $('sheet').innerHTML=multi?Array(10).fill(`<div class="card">${cardHTML()}</div>`).join(''):'';window.print()};
+$('png').onclick=async()=>{save();const c=await html2canvas($('card'),{scale:1050/$('card').offsetWidth,backgroundColor:'#fff'});const a=document.createElement('a');
 a.download=`reach-card-${($('name').value.trim()||'associate').replace(/\W+/g,'-')}.png`;a.href=c.toDataURL('image/png');a.click()};
-const q=new URLSearchParams(location.search);for(const k of['name','cat','msg','from'])if(q.get(k))$(k).value=q.get(k);
-render();showHist();
-if(q.has("cardonly")){for(const sel of["header",".form",".histbox"])document.querySelector(sel).style.display="none";document.body.style.background="#fff"}
+const q=new URLSearchParams(location.search);for(const k of['name','cat','msg','from','date'])if(q.get(k))$(k).value=q.get(k);if(q.get('type'))setType(q.get('type'));
+if(q.has("cardonly")){for(const sel of["header",".form",".histbox"])document.querySelector(sel).style.display="none";document.body.style.background="#fff";document.querySelector('main').style.display='block'}
+fit();render();showHist();
 </script></body></html>
