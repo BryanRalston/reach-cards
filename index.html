@@ -81,5 +81,6 @@ $('print').onclick=()=>{save();window.print()};
 $('png').onclick=async()=>{save();const c=await html2canvas($('card'),{scale:3,backgroundColor:null});const a=document.createElement('a');
 a.download=`reach-card-${($('name').value.trim()||'associate').replace(/\W+/g,'-')}.png`;a.href=c.toDataURL('image/png');a.click()};
 const q=new URLSearchParams(location.search);for(const k of['name','cat','msg','from'])if(q.get(k))$(k).value=q.get(k);
+if(q.has("cardonly")){for(const sel of["header",".form",".histbox"])document.querySelector(sel).remove();document.body.style.background="#fff"}
 render();showHist();
 </script></body></html>
