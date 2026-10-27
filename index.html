@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reach Recognition Cards – Store #0851</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#eef2f7;color:#1b2430}
+header{background:#0b3d91;color:#fff;padding:14px 18px}header h1{margin:0;font-size:1.2rem}header p{margin:2px 0 0;opacity:.8;font-size:.85rem}
+main{max-width:1000px;margin:auto;padding:16px;display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:800px){main{grid-template-columns:340px 1fr}}
+.panel{background:#fff;border-radius:12px;padding:16px;box-shadow:0 1px 4px #0002}
+label{display:block;font-weight:600;font-size:.9rem;margin:12px 0 4px}
+input,select,textarea{width:100%;padding:11px;font-size:16px;border:1px solid #c7d0dc;border-radius:8px;font-family:inherit}
+textarea{resize:vertical;min-height:70px}.hint{font-size:.75rem;color:#667}
+.btns{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}button{flex:1;padding:12px;font-size:1rem;border:0;border-radius:8px;background:#0b3d91;color:#fff;font-weight:600;cursor:pointer}
+button.alt{background:#f2b705;color:#1b2430}
+.wrap{display:flex;justify-content:center}
+#card{width:100%;max-width:525px;aspect-ratio:7/5;background:linear-gradient(135deg,#fff 0%,#f6f9ff 100%);border-radius:14px;position:relative;overflow:hidden;box-shadow:0 6px 20px #0003;padding:6%;display:flex;flex-direction:column;border:3px solid #0b3d91}
+#card:before{content:"";position:absolute;inset:8px;border:1.5px solid #f2b705;border-radius:9px;pointer-events:none}
+.top{display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:.7rem;letter-spacing:.15em;font-weight:700;color:#0b3d91;text-transform:uppercase}
+.badge{background:#0b3d91;color:#fff;font-size:.7rem;padding:4px 10px;border-radius:20px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.star{color:#f2b705;font-size:1.8rem;text-align:center;margin-top:2%}
+.title{text-align:center;font-family:Georgia,serif;font-size:clamp(1rem,4vw,1.5rem);color:#0b3d91;margin:0}
+.name{text-align:center;font-family:Georgia,serif;font-size:clamp(1.4rem,6vw,2.3rem);font-weight:700;margin:3% 0 1%;border-bottom:2px solid #f2b705;padding-bottom:2%;word-break:break-word}
+.msg{text-align:center;font-style:italic;font-size:clamp(.75rem,2.6vw,.95rem);color:#334;flex:1;margin-top:2%;overflow:hidden}
+.foot{display:flex;justify-content:space-between;font-size:clamp(.65rem,2.2vw,.8rem);color:#445;margin-top:auto}
+.foot b{display:block;color:#1b2430}
+#hist{list-style:none;padding:0;margin:8px 0 0;font-size:.85rem}#hist li{padding:6px 0;border-bottom:1px solid #eee;cursor:pointer}
+#clear{background:#ccc;color:#222;flex:none;padding:6px 10px;font-size:.8rem;margin-top:8px}
+@media print{@page{size:7in 5in;margin:0}body{background:#fff}header,.panel.form,.histbox{display:none!important}main{display:block;padding:0}.panel{box-shadow:none;padding:0}
+#card{width:7in;max-width:none;height:5in;box-shadow:none;border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}.title{font-size:24pt}.name{font-size:36pt}.msg{font-size:13pt}.brand,.badge{font-size:9pt}.foot{font-size:11pt}}
+</style></head><body>
+<header><h1>⭐ Reach Recognition Cards</h1><p>Store #0851</p></header>
+<main>
+<section class="panel form">
+<label for="name">Associate name</label><input id="name" placeholder="e.g. Jordan Smith" maxlength="40">
+<label for="cat">Category</label><select id="cat"></select>
+<label for="msg">Message (optional)</label><textarea id="msg" maxlength="220" placeholder="Thank you for..."></textarea>
+<label for="from">From</label><input id="from" placeholder="Bryan Ralston, Store Manager" maxlength="50">
+<label for="date">Date</label><input id="date" type="date">
+<div class="btns"><button id="print">🖨️ Print</button><button id="png" class="alt">⬇️ Download PNG</button></div>
+<p class="hint">Print uses a 7×5 in card size. Nothing is sent anywhere; recent cards are kept only on this device.</p>
+</section>
+<div>
+<div class="wrap"><div id="card">
+<div class="top"><span class="brand">Store #0851</span><span class="badge" id="cCat"></span></div>
+<div class="star">★ ★ ★</div><p class="title">Reach Recognition</p>
+<div class="name" id="cName">Associate Name</div>
+<div class="msg" id="cMsg"></div>
+<div class="foot"><span>From<b id="cFrom">—</b></span><span style="text-align:right">Date<b id="cDate"></b></span></div>
+</div></div>
+<div class="panel histbox" style="margin-top:18px"><strong>Recent cards</strong><ul id="hist"></ul><button id="clear">Clear history</button></div>
+</div></main>
+<script>
+// ===== EDIT CATEGORIES HERE (PLACEHOLDERS – replace with real Reach categories) =====
+const CATEGORIES = [
+  "Teamwork",
+  "Customer Service",
+  "Going Above & Beyond",
+  "Safety",
+  "Leadership"
+];
+// ===================================================================================
+const $=id=>document.getElementById(id);
+CATEGORIES.forEach(c=>$('cat').add(new Option(c,c)));
+$('date').value=new Date().toLocaleDateString('en-CA');
+$('from').value=localStorage.getItem('rc_from')||'';
+function fmt(d){if(!d)return'';const[y,m,da]=d.split('-');return new Date(y,m-1,da).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}
+function render(){$('cName').textContent=$('name').value.trim()||'Associate Name';$('cCat').textContent=$('cat').value;
+$('cMsg').textContent=$('msg').value.trim()?'“'+$('msg').value.trim()+'”':'';$('cFrom').textContent=$('from').value.trim()||'—';$('cDate').textContent=fmt($('date').value)}
+['name','cat','msg','from','date'].forEach(i=>$(i).addEventListener('input',render));
+function hist(){return JSON.parse(localStorage.getItem('rc_hist')||'[]')}
+function save(){const n=$('name').value.trim();if(!n)return;localStorage.setItem('rc_from',$('from').value);
+const h=hist().filter(x=>!(x.name===n&&x.cat===$('cat').value&&x.date===$('date').value));h.unshift({name:n,cat:$('cat').value,msg:$('msg').value,from:$('from').value,date:$('date').value});
+localStorage.setItem('rc_hist',JSON.stringify(h.slice(0,15)));showHist()}
+function showHist(){const ul=$('hist');ul.innerHTML='';const h=hist();if(!h.length)ul.innerHTML='<li style="cursor:default;color:#888">None yet</li>';
+h.forEach(x=>{const li=document.createElement('li');li.textContent=`${x.name} — ${x.cat} (${fmt(x.date)})`;li.onclick=()=>{for(const k of['name','cat','msg','from','date'])$(k).value=x[k];render();scrollTo(0,0)};ul.appendChild(li)})}
+$('clear').onclick=()=>{localStorage.removeItem('rc_hist');showHist()};
+$('print').onclick=()=>{save();window.print()};
+$('png').onclick=async()=>{save();const c=await html2canvas($('card'),{scale:3,backgroundColor:null});const a=document.createElement('a');
+a.download=`reach-card-${($('name').value.trim()||'associate').replace(/\W+/g,'-')}.png`;a.href=c.toDataURL('image/png');a.click()};
+const q=new URLSearchParams(location.search);for(const k of['name','cat','msg','from'])if(q.get(k))$(k).value=q.get(k);
+render();showHist();
+</script></body></html>
