@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Reach Recognition Cards – Store #0851</title>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#eef2f7;color:#1b2430}
 header{background:#0b3d91;color:#fff;padding:14px 18px}header h1{margin:0;font-size:1.2rem}header p{margin:2px 0 0;opacity:.8;font-size:.85rem}
@@ -81,6 +81,6 @@ $('print').onclick=()=>{save();window.print()};
 $('png').onclick=async()=>{save();const c=await html2canvas($('card'),{scale:3,backgroundColor:null});const a=document.createElement('a');
 a.download=`reach-card-${($('name').value.trim()||'associate').replace(/\W+/g,'-')}.png`;a.href=c.toDataURL('image/png');a.click()};
 const q=new URLSearchParams(location.search);for(const k of['name','cat','msg','from'])if(q.get(k))$(k).value=q.get(k);
-if(q.has("cardonly")){for(const sel of["header",".form",".histbox"])document.querySelector(sel).remove();document.body.style.background="#fff"}
 render();showHist();
+if(q.has("cardonly")){for(const sel of["header",".form",".histbox"])document.querySelector(sel).style.display="none";document.body.style.background="#fff"}
 </script></body></html>
