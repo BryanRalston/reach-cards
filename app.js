@@ -86,12 +86,16 @@ $('png').onclick=async()=>{const a=document.createElement('a');a.download=`reach
 
 
 // ---------- Voice input for "why" ----------
+// Rebuild full transcript from ALL results each time (never append). Android Chrome may re-emit
+// cumulative results ("great", "great job", ...); keep only the longest of overlapping prefixes.
+function speechText(results){const parts=[];for(let i=0;i<results.length;i++){const t=(results[i][0]&&results[i][0].transcript||'').trim();if(!t)continue;
+ const prev=parts[parts.length-1];if(prev!==undefined){const a=prev.toLowerCase(),b=t.toLowerCase();const fa=a.split(' ').slice(0,2).join(' ');if(b.startsWith(a)||(b.length>=a.length&&b.startsWith(fa))){parts[parts.length-1]=t;continue}if(a.startsWith(b))continue}parts.push(t)}
+ return parts.join(' ').replace(/\s+/g,' ').trim()}
 (()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;const btn=$('mic'),st=$('micState'),ta=$('msg');btn.style.display='inline-block';let rec=null,base='';
  btn.onclick=()=>{if(rec){rec.stop();return}
-  rec=new SR();rec.lang='en-US';rec.interimResults=true;rec.continuous=true;base=ta.value;let fin='';
+  rec=new SR();rec.lang='en-US';rec.interimResults=true;rec.continuous=false;rec.maxAlternatives=1;base=ta.value.trimEnd();
   rec.onstart=()=>{btn.textContent='⏹';btn.style.background='#c8102e';st.textContent='Listening… tap to stop'};
-  rec.onresult=e=>{let interim='';for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)fin+=t;else interim+=t}
-   ta.value=((base?base.trimEnd()+' ':'')+(fin+interim).trim()).slice(0,220);render()};
+  rec.onresult=e=>{ta.value=((base?base+' ':'')+speechText(e.results)).slice(0,220);render()};
   rec.onerror=e=>{st.textContent=e.error==='not-allowed'||e.error==='service-not-allowed'?'Microphone permission denied.':e.error==='no-speech'?'No speech heard.':'Voice error: '+e.error};
   rec.onend=()=>{rec=null;btn.textContent='🎤';btn.style.background='';if(st.textContent.startsWith('Listening'))st.textContent=''};
   try{rec.start()}catch(err){st.textContent='Could not start mic: '+err.message;rec=null}}})();
